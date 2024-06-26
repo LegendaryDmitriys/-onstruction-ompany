@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Редактирование адреса{% endblock %}
+
+{% block content %}
+<h1>{% if form.instance.pk %}Изменение Адреса{% else %}Новый Адрес{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+<a class="btn" href="{% url 'address_list' %}">Назад</a>
+{% endblock %}

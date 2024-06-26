@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали материала{% endblock %}
+
+{% block content %}
+<h1>Детали материала</h1>
+<p>Название: {{ material.name }}</p>
+<p>Вес: {{ material.weight }}</p>
+<p>Количество: {{ material.quantity }}</p>
+<p>Стоимость: {{ material.cost }}</p>
+<p>Покупок: {{ material.purchase }}</p>
+<p>Проект: {{ material.project }}</p>
+{% if perms.constructionCompany.edit_material %}
+    <a href="{% url 'material_edit' pk=material.pk %}">Редактировать</a>
+{% endif %}
+{% if perms.constructionCompany.delete_material %}
+    <a href="{% url 'material_delete' pk=material.pk %}">Удалить</a>
+{% endif %}
+<a href="{% url 'material_list' %}">Назад</a>
+{% endblock %}

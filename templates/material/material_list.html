@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Список материалов{% endblock %}
+
+{% block content %}
+<h1>Список материалов</h1>
+    {% if perms.constructionCompany.can_search %}
+    <form method="get" action="{% url 'material_list' %}">
+    {{ form.as_p }}
+    <button type="submit">Поиск</button>
+    <a style="margin-top: 10px;" href="{% url 'export_material_csv' %}?query={{ form.query.value }}">Экспортировать в CSV</a>
+    </form>
+    {% endif %}
+    <ul>
+    {% for material in items %}
+        <li>
+            <a href="{% url 'material_detail' pk=material.pk %}">{{ material.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% if perms.constructionCompany.add_material %}    
+    <a class="btn" href="{% url 'material_new' %}">Добавить новый материал</a>
+{% endif %}
+{% endblock %}  
+
+

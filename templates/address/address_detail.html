@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали адреса{% endblock %}
+
+{% block content %}
+<h1>Подробности адреса</h1>
+<p>Address: {{ address }}</p>
+{% if perms.constructionCompany.edit_address %}
+    <a class="btn" href="{% url 'address_edit' pk=address.pk %}">Редактировать</a>
+{% endif %}
+{% if perms.constructionCompany.delete_address %}
+    <a class="btn" href="{% url 'address_delete' pk=address.pk %}">Удалить</a>
+{% endif %}
+<a class="btn" href="{% url 'address_list' %}">Назад</a>
+{% endblock %}

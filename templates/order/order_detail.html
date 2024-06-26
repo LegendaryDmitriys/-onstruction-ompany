@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали заказа{% endblock %}
+
+{% block content %}
+<h1>Детали заказа</h1>
+<p>Проект: {{ order.project }}</p>
+<p>Дата завершения: {{ order.completion_date }}</p>
+<p>Стоимость: {{ order.cost }}</p>
+<p>Адрес: {{ order.address }}</p>
+{% if perms.constructionCompany.edit_order %}
+    <a href="{% url 'order_edit' pk=order.pk %}">Редактировать</a>
+{% endif %}
+{% if perms.constructionCompany.delete_order %}
+    <a href="{% url 'order_delete' pk=order.pk %}">Удалить</a>
+{% endif %}
+<a href="{% url 'order_list' %}">Назад</a>
+{% endblock %}

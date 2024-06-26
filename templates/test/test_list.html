@@ -1,0 +1,18 @@
+
+{% block content %}
+    {% if perms.module3.search %}
+    <form method="get" action="{% url 'test_list' %}">
+        {{ form.as_p }}
+    <button type="submit">Поиск</button>
+        <a href="{% url 'test_export' %}?query{{ form.query.value }}">Экспортировать</a>
+    </form>
+    {% endif %}
+    <ul>
+        {% for test in items %}
+            <a href="{% url 'test_detail' test.pk %}">{{ test.vopros }}</a>
+        {% endfor %}
+    </ul>
+    {% if perms.module3.add_test %}
+        <a href="{% url 'test_add' %}">Добавить</a>
+    {% endif %}
+{% endblock %}

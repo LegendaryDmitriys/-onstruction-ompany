@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Изменения склада{% endblock %}
+
+{% block content %}
+<h1>{% if form.instance.pk %}Изменения на складе{% else %}Новый материал на склад{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+<a href="{% url 'warehouse_list' %}">Назад</a>
+{% endblock %}

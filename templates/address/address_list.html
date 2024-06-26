@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Список адрессов{% endblock %}
+
+{% block content %}
+<h1>Cписок адресов</h1>
+{% if perms.constructionCompany.can_search %}
+<form method="get" action="{% url 'address_list' %}">
+{{ form.as_p }}
+<button type="submit">Поиск</button>
+<a style="margin-top: 10px;" href="{% url 'export_address_csv' %}?query={{ form.query.value }}">Экспортировать в CSV</a>
+</form>
+{% endif %}
+<ul>
+    {% for address in items %}
+        <li>
+            <a href="{% url 'address_detail' pk=address.pk %}">{{ address }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% if perms.constructionCompany.add_addres %}
+    <a class="btn" href="{% url 'address_new' %}">Добавить новый адрес</a>
+{% endif %}
+{% endblock %}

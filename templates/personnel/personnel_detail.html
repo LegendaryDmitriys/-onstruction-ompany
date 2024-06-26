@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали сотрудника{% endblock %}
+
+{% block content %}
+<h1>Детали персонала</h1>
+<h2>{{ personnel.full_name }}</h2>
+<p>Должность: {{ personnel.position }}</p>
+<p>Зарплата: {{ personnel.salary }}</p>
+<p>Телефон: {{ personnel.phone }}</p>
+<p>Адрес: {{ personnel.address }}</p>
+<p>Опыт: {{ personnel.experience }}</p>
+{% if perms.constructionCompany.edit_personnel %}
+    <a href="{% url 'personnel_edit' pk=personnel.pk %}">Редактировать</a>
+{% endif %}
+{% if perms.constructionCompany.delete_personnel %}
+    <a href="{% url 'personnel_delete' pk=personnel.pk %}">Удалить</a>
+{% endif %}
+<a href="{% url 'personnel_list' %}">Назад</a>
+{% endblock %}

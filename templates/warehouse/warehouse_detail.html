@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали склада{% endblock %}
+
+{% block content %}
+<h1>Детали склада</h1>
+<p>Материал: {{ warehouse.material }}</p>
+<p>Стоимость: {{ warehouse.material.cost }}</p>
+<p>Количество: {{ warehouse.material.quantity }}</p>
+<p>Закупок: {{ warehouse.material.purchase }}</p>
+{% if perms.constructionCompany.edit_warehouse %}
+    <a href="{% url 'warehouse_edit' pk=warehouse.pk %}">Редактировать</a>
+{% endif %}
+{% if perms.constructionCompany.delete_warehouse %}
+    <a href="{% url 'warehouse_delete' pk=warehouse.pk %}">Удалить</a>
+{% endif %}
+<a href="{% url 'warehouse_list' %}">Назад</a>
+{% endblock %}

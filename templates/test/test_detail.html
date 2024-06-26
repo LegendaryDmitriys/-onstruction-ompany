@@ -1,0 +1,16 @@
+
+
+{% block content %}
+<p>Вопрос: {{ test.vopros }}</p>
+<p>Ответ: {{ test.otvet }}</p>
+<p>Cложность: {{ test.complexity }}</p>
+{% if perms.module3.edit_test %}
+      <a href="{% url 'test_edit' pk=test.pk %}">Редактирование</a>
+{% endif %}
+{% if perms.module3.delete_test %}
+    <a href="{% url 'test_delete' pk=test.pk %}">Удалить</a>
+{% endif %}
+    <a href="{% url 'test_list' %}">Назад</a>
+{% endblock %}
+
+

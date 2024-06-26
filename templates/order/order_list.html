@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Список заказов{% endblock %}
+
+{% block content %}
+<h1>Список заказов</h1>
+{% if perms.constructionCompany.can_search %}
+<form method="get" action="{% url 'order_list' %}">
+{{ form.as_p }}
+<button type="submit">Поиск</button>
+<a style="margin-top: 10px;" href="{% url 'export_order_csv' %}?query={{ form.query.value }}">Экспортировать в CSV</a>
+</form>
+{% endif %}
+<ul>
+    {% for order in items %}
+        <li>
+            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.project }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% if perms.constructionCompany.add_order %}
+    <a class="btn" href="{% url 'order_new' %}">Добавить новый заказ</a>
+{% endif %}
+{% endblock %}

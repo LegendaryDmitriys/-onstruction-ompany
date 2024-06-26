@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Детали проекта: {{ project.name }}{% endblock %}
+
+{% block content %}
+<h1>Детали проекта: {{ project.name }}</h1>
+<p>Название: {{ project.name }}</p>
+{% if perms.constructionCompany.edit_project %}
+    <a href="{% url 'project_edit' pk=project.pk %}">Редактировать</a>
+{% endif %}
+{% if perms.constructionCompany.delete_project %}
+    <a href="{% url 'project_delete' pk=project.pk %}">Удалить</a>
+{% endif %}
+<a href="{% url 'project_list' %}">Назад</a>
+{% endblock %}
+
+

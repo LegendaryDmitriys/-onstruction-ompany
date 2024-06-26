@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Список проектов{% endblock %}
+
+{% block content %}
+<h1>Список проектов</h1>
+{% if perms.constructionCompany.can_search %}
+<form method="get" action="{% url 'project_list' %}">
+{{ form.as_p }}
+<button type="submit">Поиск</button>
+<a style="margin-top: 10px;" href="{% url 'export_personnel_csv' %}?query={{ form.query.value }}">Экспортировать в CSV</a>
+</form>
+{% endif %}
+<ul>
+{% for project in items %}
+    <li><a href="{% url 'project_detail' project.pk %}">{{ project.name }}</a></li>
+{% endfor %}
+</ul>
+{% if perms.constructionCompany.add_project %}
+    <a class="btn" href="{% url 'project_new' %}">Добавить новый проект</a>
+{% endif %}
+{% endblock %}

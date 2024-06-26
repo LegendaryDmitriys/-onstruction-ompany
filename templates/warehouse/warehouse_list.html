@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Cписок складов{% endblock %}
+
+{% block content %}
+<h1>Список складов</h1>
+{% if perms.constructionCompany.can_search %}
+<form method="get" action="{% url 'warehouse_list' %}">
+{{ form.as_p }}
+<button type="submit">Поиск</button>
+<a style="margin-top: 10px;" href="{% url 'export_warehouse_csv' %}?query={{ form.query.value }}">Экспортировать в CSV</a>
+</form>
+{% endif %}
+<ul>
+    {% for warehouse in items %}
+        <li>
+            <a href="{% url 'warehouse_detail' pk=warehouse.pk %}">{{ warehouse.material }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% if perms.constructionCompany.add_warehouse %}    
+    <a class="btn" href="{% url 'warehouse_new' %}">Добавить новый материал на склад</a>
+{% endif %}
+{% endblock %}

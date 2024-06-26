@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Строительная компания{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="header">
+        <nav style="display: flex; gap: 150px; flex-direction: row; align-items: center">
+            <ul class="menu">
+                <li><a href="{% url 'personnel_list' %}">Персонал</a></li>
+                <li><a href="{% url 'address_list' %}">Адреса</a></li>
+                <li><a href="{% url 'order_list' %}">Заказы</a></li>
+                <li><a href="{% url 'material_list' %}">Материалы</a></li>
+                <li><a href="{% url 'warehouse_list' %}">Склады</a></li>
+                <li><a href="{% url 'project_list' %}">Проекты</a></li>
+            </ul>
+            <div>
+                <a href="{% url 'login' %}">Войти</a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
